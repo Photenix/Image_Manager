@@ -1,3 +1,0 @@
-agregarle un auto resize
-
-se agrego un resize solo para la imagen
