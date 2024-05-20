@@ -69,9 +69,9 @@ def browseFiles():
 
     information = FilterInformation(dirname)
 
-    insert_list( listbox, information.get_list_files() )
     arr_dir = information.get_list_dir()
 
+    #show directory
     if len(lbl_list) != 0:
         for i in lbl_list:
             i.destroy()
@@ -80,6 +80,9 @@ def browseFiles():
     for i in range(9):
         lbl_list.append( ctk.CTkLabel( tools_frame, text= f"Numero {i}: {arr_dir[i]}" ) )
         lbl_list[i].pack( pady= 5 )
+
+    #show images file
+    insert_list( listbox, information.get_list_files() )
     
     isOpen = True
 

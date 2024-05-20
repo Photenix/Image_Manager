@@ -9,9 +9,11 @@ class FilterInformation:
     list_files = []
 
     def __init__( self, address ) -> None:
+        
         self.address = address
         self.list_files = [i for i in listdir(address) if self.is_image_type(i)]
         self.list_dir = [i for i in listdir(address) if self.is_dir(i)]
+        
         for i in range(10 - len(self.list_dir)):
             self.list_dir.append(None)
         self.n_files = len(self.list_files)
@@ -22,6 +24,9 @@ class FilterInformation:
     def get_list_dir(self):
         return self.list_dir
     
+    def get_number_dir(self):
+        return len(self.list_dir)
+
     def get_number_files(self):
         return self.n_files
     
@@ -34,5 +39,5 @@ class FilterInformation:
             return x != None
         
     def is_dir( self, name ):
-        x = re.search( "\\.[a-z]*$", name )
-        return x == None
+        x = re.match( "^\\w+$", name )
+        return x != None
