@@ -1,6 +1,5 @@
 from os import listdir
 import re
-
 class FilterInformation:
     # te alista los archivos tipo .png y .jpg para su revision
 
@@ -31,12 +30,8 @@ class FilterInformation:
         return self.n_files
     
     def is_image_type( self, name ):
-        x = re.search(".jpg$", name)
-        if x != None:
-            return True
-        else:
-            x = re.search(".png$", name)
-            return x != None
+        x = re.search("\\.(jpg|png|jpeg)$", name)
+        return x != None
         
     def is_dir( self, name ):
         x = re.match( "^\\w+$", name )

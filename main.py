@@ -78,7 +78,7 @@ def browseFiles():
     
     lbl_list = []
     for i in range(9):
-        lbl_list.append( ctk.CTkLabel( tools_frame, text= f"Numero {i}: {arr_dir[i]}" ) )
+        lbl_list.append( ctk.CTkLabel( tools_frame, text= f"Numero {i}: {arr_dir[i]}", anchor='w' ) )
         lbl_list[i].pack( pady= 5 )
 
     #show images file
@@ -125,10 +125,14 @@ def command_keys (event):
     index = index if index != None else 0
 
     if event.keysym == 'Up':
-        listbox.select( getNext(index, -1) if index > 0 else 0 )
+        value = getNext(index, -1) if index > 0 else 0
+        print( value )
+        listbox.select( value )
 
     elif event.keysym == 'Down':
-        listbox.select( getNext(index, 1) if index < listbox.size() - 1 else listbox.size() - 1)
+        value = getNext(index, 1) if index < listbox.size() - 1 else listbox.size() - 1
+        print( value )
+        listbox.select( value )
     
     elif (event.keycode >= 48 and event.keycode <= 57) or (event.keycode >= 96 and event.keycode <= 105):
         global dirname

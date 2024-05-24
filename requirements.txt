@@ -1,0 +1,11 @@
+altgraph==0.17.4
+CTkListbox==0.10
+customtkinter==5.2.1
+darkdetect==0.8.0
+packaging==23.2
+pefile==2023.2.7
+Pillow==10.1.0
+pyinstaller @ https://github.com/pyinstaller/pyinstaller/archive/develop.zip#sha256=8ef8c2f27f24a5d7ad914629415e007f27d35c26a4ad9fe27ae09896ff406841
+pyinstaller-hooks-contrib==2024.6
+pywin32-ctypes==0.2.2
+setuptools==70.0.0
