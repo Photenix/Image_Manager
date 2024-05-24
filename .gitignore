@@ -1,5 +1,15 @@
 venv
 .vscode
 __pycache__
+
+#test
 test.py
-*.txt
+
+#build
+dist
+build
+main.spec
+
+#text
+libraries.txt
+info.txt
