@@ -62,6 +62,7 @@ image_frame.grid(row=0, column=2, sticky='ns')
 def browseFiles():
     #puedo abrir un directorio
     global dirname, lbl_list, isOpen, information
+
     dirname = ctk.filedialog.askdirectory()
 
     if dirname == '':
@@ -81,8 +82,12 @@ def browseFiles():
         lbl_list.append( ctk.CTkLabel( tools_frame, text= f"Numero {i}: {arr_dir[i]}", anchor='w' ) )
         lbl_list[i].pack( pady= 5 )
 
+    listbox.delete("all")
+
     #show images file
     insert_list( listbox, information.get_list_files() )
+
+    # print( listbox.buttons )
     
     isOpen = True
 
@@ -93,9 +98,11 @@ def browseFiles():
     label_name_file.configure(text="Directory Opened: " + dirname)
     """
 
-def insert_list( list, arr ):
+def insert_list( list:CTkListbox, arr ):
     for n, i in enumerate(arr):
-        list.insert( n, i )
+        list.insert( "end", i, update=False )
+        if n % 20 == 0 : list.update()
+    list.update()
 
 def handle_select( event ):
     global dirname, main_image, image_label
