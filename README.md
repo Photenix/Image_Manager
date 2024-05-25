@@ -8,6 +8,9 @@ by: JM4P1R0
 Build the project with the next command
 ```powershell
 #init virtual environment
+python -m venv venv
+
+#star virtual environment
 ./venv/Script/activate
 
 #install libraries
