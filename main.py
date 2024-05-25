@@ -99,10 +99,14 @@ def browseFiles():
     """
 
 def insert_list( list:CTkListbox, arr ):
+    num_arr = len(arr)
     for n, i in enumerate(arr):
         list.insert( "end", i, update=False )
-        if n % 20 == 0 : list.update()
+        if n % 100 == 0 :
+            progressbar_files.set(n/num_arr)
+            list.update()
     list.update()
+    progressbar_files.set(1)
 
 def handle_select( event ):
     global dirname, main_image, image_label
@@ -179,6 +183,9 @@ def re_size (event, element_list, max_space = {}):
 btn_file = ctk.CTkButton(tools_frame, text="Buscar Carpeta", command= browseFiles )
 btn_file.pack( side = "top" )
 
+progressbar_files = ctk.CTkProgressBar(app, orientation="horizontal")
+progressbar_files.grid( row=1, column=1,  sticky='nsew' )
+progressbar_files.set(1)
 
 listbox = CTkListbox(app, command= lambda event : handle_select(event), height= app.winfo_reqheight(), width= 300)
 #listbox.grid(row=0, column=0, sticky='ns')
