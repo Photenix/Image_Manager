@@ -263,7 +263,7 @@ class CTkListbox(customtkinter.CTkScrollableFrame):
             except: pass #prevent errors :3
             for n, i in enumerate(self.buttons):
                 self.buttons[i].destroy()
-                if n % 20 == 0 : self.update()
+                if n % 30 == 0 : self.update()
             #wait for end all is a difference of 25.000% (more of less)
             self.update()
 
