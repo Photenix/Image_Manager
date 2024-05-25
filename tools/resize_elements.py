@@ -1,5 +1,3 @@
-from  customtkinter import CTkScrollableFrame
-
 def resize_elements (event, app, element_list, max_space = {}):
     """
     max_space = values(int) : 0.0 to 1.0
@@ -28,7 +26,7 @@ def resize_elements (event, app, element_list, max_space = {}):
         pass
 
 def resize_one_element ( event, app, elements, mod_element ):
-    "resize in X eje one element"
+    "resize in X axis, one element"
 
     a_width = app.winfo_width()
 

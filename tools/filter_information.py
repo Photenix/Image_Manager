@@ -5,9 +5,10 @@ class FilterInformation:
 
     address = ""
     n_files = 0
-    list_files = []
+    n_dirs = 0
+    list_files: list = []
 
-    def __init__( self, address ) -> None:
+    def __init__( self, address:str ) -> None:
         
         self.address = address
         self.list_files = [i for i in listdir(address) if self.is_image_type(i)]
@@ -16,6 +17,7 @@ class FilterInformation:
         for i in range(10 - len(self.list_dir)):
             self.list_dir.append(None)
         self.n_files = len(self.list_files)
+        self.n_dirs = len(self.list_dir)
 
     def get_list_files(self):
         return self.list_files
@@ -24,7 +26,7 @@ class FilterInformation:
         return self.list_dir
     
     def get_number_dir(self):
-        return len(self.list_dir)
+        return self.n_dirs
 
     def get_number_files(self):
         return self.n_files
