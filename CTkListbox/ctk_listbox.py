@@ -5,7 +5,6 @@ Author: Akash Bora
 
 import customtkinter
 
-import time
 class CTkListbox(customtkinter.CTkScrollableFrame):
     def __init__(
         self,
@@ -153,12 +152,11 @@ class CTkListbox(customtkinter.CTkScrollableFrame):
                 index += 1
             return tuple(indexes)
 
-        else:
-            for i in self.buttons.values():
-                if i == self.selected:
-                    return index
-                else:
-                    index += 1
+        #found de value
+        for i in self.buttons.keys():
+            if self.buttons[i] == self.selected:
+                return i
+        return None
 
     def bind(self, key, func, add="+"):
         super().bind(key, lambda e: func(e), add=add)
@@ -281,7 +279,8 @@ class CTkListbox(customtkinter.CTkScrollableFrame):
             if int(index) >= len(self.buttons):
                 return
             if not last:
-                index = list(self.buttons.keys())[int(index)]
+                # index = list(self.buttons.keys())[int(index)]
+                index = index if index in self.buttons.keys() else list(self.buttons.keys())[int(index)]
 
         if last:
             if str(last).lower() == "end":
@@ -315,15 +314,14 @@ class CTkListbox(customtkinter.CTkScrollableFrame):
             else:
                 index = list(self.buttons.keys())[int(index)]
                 return self.buttons[index].cget("text")
-        else:
-            if self.multiple:
-                return (
-                    [x.cget("text") for x in self.selections]
-                    if len(self.selections) > 0
-                    else None
-                )
-            else:
-                return self.selected.cget("text") if self.selected is not None else None
+        
+        if self.multiple:
+            return (
+                [x.cget("text") for x in self.selections]
+                if len(self.selections) > 0
+                else None
+            )
+        return self.selected.cget("text") if self.selected is not None else None
 
     def configure(self, **kwargs):
         """configurable options of the listbox"""

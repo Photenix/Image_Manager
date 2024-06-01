@@ -1,4 +1,4 @@
-def resize_image( type_img, width = 450 ):
+def resize_image( type_img, height:int=700, width:int = 450 ):
     """
     Re-dimensiona una imagen en un tamaño a igual proporción de lado y lado 
     10 x 15 = -2 =  8 x 13
@@ -13,8 +13,23 @@ def resize_image( type_img, width = 450 ):
     #print( img_original.width )
     #print( img_original.height )
 
-    min_height = type_img.height * (( (width * 100) / type_img.width) / 100)
-    min_height = int(min_height)
+    compareWidth = type_img.width - width
+    compareHeight = type_img.height - height
+
+    newH = height
+    newW = width
+
+    percentX = (type_img.height/type_img.width) * 100 
+    percentY = (type_img.width/type_img.height) * 100
+
+    print( percentX, percentY, percentX > percentY )
+
+    if( compareWidth > compareHeight or percentX > percentY ):
+        newH = type_img.height * (( (width * 100) / type_img.width) / 100)
+        newH = int(newH)
+    else:
+        newW = type_img.width * (( (height * 100) / type_img.height) / 100)
+        newW = int(newW)
     #equal dimension 
-    img_copy = type_img.resize((width, min_height))
+    img_copy = type_img.resize((newW, newH))
     return img_copy

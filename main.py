@@ -109,10 +109,12 @@ def insert_list( list:CTkListbox, arr ):
     progressbar_files._draw()
     num_arr = len(arr)
     for n, i in enumerate(arr):
-        list.insert( "end", i, update=False )
+        # list.insert( "end", i, update=False )
+        list.insert( index=n, option=i, update=False )
         if n % 100 == 0 :
             progressbar_files.set(n/num_arr)
             list.update()
+        if n > 1100: break
     #end return the original color
     progressbar_files._progress_color = ['#3B8ED0', '#1F6AA5']
     progressbar_files._draw()
@@ -120,13 +122,15 @@ def insert_list( list:CTkListbox, arr ):
     list.update()
 
 def handle_select( event ):
-    global dirname, main_image, image_label
+    global dirname, main_image, image_label, image_frame
     link = f"{dirname}/{event}"
 
     #! corregir 
-    windows = image_label.master.cget("width")
+    __windows = image_label.master.cget("width")
+    __height = image_label.master.cget("height")
 
-    main_image = resize_image( Image.open(link), windows - 25 )
+    main_image = resize_image( Image.open(link), __height, __windows - 25 )
+    # image_frame._parent_canvas.yview("scroll", 0, "units") ver como funciona
     image_label.configure( image=pre_img(main_image) )
 
 def pre_img ( img: ctk.CTkImage ):
@@ -137,6 +141,8 @@ def getNext ( number, add ):
     global deleteList
     x = lambda num : num in deleteList
     y = x(number + add)
+    # print(f"---resultado lamda getNext: {y}")
+    # print(f"---numero dado getNext: {number + add}")
     return number + add if y == False else getNext( number + add,  add)
 
 def command_keys (event):
@@ -148,12 +154,17 @@ def command_keys (event):
 
     if event.keysym == 'Up':
         value = getNext(index, -1) if index > 0 else 0
-        print( value )
         list_box.select( value )
+        # print( value )
 
     elif event.keysym == 'Down':
+        # print( f"---test index: {index}" )
+        # print( f"---test deleteList: {deleteList}" )
+        # print( f"---test getNext: {getNext(index, 1)}" )
+        # print( f"---test list size: {list_box.size()}" )
+        # print( f"---test else list_box.size(): {list_box.size() - 1}" )
+        # print( "\n\n" )
         value = getNext(index, 1) if index < list_box.size() - 1 else list_box.size() - 1
-        print( value )
         list_box.select( value )
     
     elif (event.keycode >= 48 and event.keycode <= 57) or (event.keycode >= 96 and event.keycode <= 105):
